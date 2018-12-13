@@ -8,13 +8,13 @@ DHT dht(2,11,100); // (pin = D4, type, count)
 #define DHT11_PIN 2
 
 //-------- Customise these values -----------
-const char* ssid = "wired";
-const char* password = "11223344";
-
-#define ORG "owt6hh" // "quickstart" or use your organisation
-#define DEVICE_ID "ESP8266"      
-#define DEVICE_TYPE "ESP8266WiFiModule" // your device type or not used for "quickstart"
-#define TOKEN "poon@m06" // your device token or not used for "quickstart"
+const char* ssid = "wifi_ssid";
+const char* password = "password";
+// From IBM Watson platform
+#define ORG "organisation" // "quickstart" or use your organisation
+#define DEVICE_ID "device_id"      
+#define DEVICE_TYPE "device_type" // your device type or not used for "quickstart"
+#define TOKEN "device_token" // your device token or not used for "quickstart"
 //-------- Customise the above values --------
 
 char server[] = ORG ".messaging.internetofthings.ibmcloud.com";
@@ -62,8 +62,6 @@ void loop() {
   float humidity = dht.readHumidity(DHT11_PIN);
   String payload = "{\"d\":{\"Temperature\":";
   payload += temperature;
-  //payload += \"Humidity\":";
-  //payload += humidity;
   payload += "}}";
   
   Serial.print("Sending payload: "); Serial.println(payload);
