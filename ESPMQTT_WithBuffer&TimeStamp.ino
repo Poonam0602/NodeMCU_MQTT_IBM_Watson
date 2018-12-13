@@ -14,13 +14,13 @@ int dst = 1800; //daylight saving timing
 
 int statusWifi = WL_IDLE_STATUS;
 //-------- Customise these values -----------
-const char* ssid = "Poonam";
-const char* password = "goldengun";
+const char* ssid = "WiFi_ssid";
+const char* password = "Password";
 
-#define ORG "d5swp6" // use your organisation
-#define DEVICE_ID "ESP8266"      
-#define DEVICE_TYPE "ESP8266WiFiModule" // your device type 
-#define TOKEN "poon@m06" // your device token 
+#define ORG "organisation_ID" // use your organisation
+#define DEVICE_ID "device_id"      
+#define DEVICE_TYPE "device_type" // your device type 
+#define TOKEN "device_token" // your device token 
 
 //-------- Customise the above values --------
 
@@ -123,19 +123,17 @@ void loop()
           }
 
         my_buf->add(my_buf, &instance); 
-        delay(500); // change this delay to control elements in buffer
+        delay(60*60*1000); // Update per hour -> change this delay to control elements in buffer
       }
-     Serial.println("In Loop............................Client connected....................................");
+     Serial.println("............................Client connected....................................");
    }
   Serial.print("Buffer elements");
   Serial.println(my_buf->numElements(my_buf));
-  //Serial.println("Out of loop............................Client connected....................................");
   
   time_t now = time(nullptr);
   struct tm* p_tm = localtime(&now);
   // Zero them out
   memset(&instance, 0, sizeof(struct data));
-  //getData(instance);
   instance.temperature = dht.readTemperature(0,DHT11_PIN);
   instance.humidity = dht.readHumidity(DHT11_PIN);
   instance.day =p_tm->tm_mday;
@@ -181,6 +179,6 @@ void loop()
        Serial.println("");
        delay(1000); // Contineously sends data till buffer becomes empty
   }
-  delay(1*30*1000);// 30sec -> update this to an hour
+  delay(60*60*1000);// 60 minutes delay
 
 }
